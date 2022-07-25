@@ -8,15 +8,15 @@ public class WageEmployee extends Employee {
 		setWage(wage);
 		setHours(hours);
 	}
+	@Override
+	public int computePay() {
+		return super.computePay() + wage * hours;
+	}
 	public void setWage(int wage) {
 		this.wage = wage;
 	}
 	public void setHours(int hours) {
 		this.hours = hours;
-	}
-	@Override
-	public int computeSalary() {
-		return super.computeSalary() + (this.wage * this.hours);
 	}
 	
 }

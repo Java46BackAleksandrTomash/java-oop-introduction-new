@@ -1,7 +1,6 @@
 package telran.people;
 
 public class SalesPerson extends Employee {
-
 	private int sales;
 	private int percentPay;
 
@@ -16,13 +15,16 @@ public class SalesPerson extends Employee {
 	}
 
 	public void setPercentPay(int percentPay) {
+		if (percentPay < 0 || percentPay > 100) {
+			throw new IllegalArgumentException (String.format("%d Wrong percent value,"
+					+ " should be in range [0-100]", percentPay));
+		}
 		this.percentPay = percentPay;
 	}
 
 	@Override
 	public int computePay() {
-
-		return super.computePay() + (this.sales / 100 * this.percentPay);
+		return super.computePay() + sales * percentPay / 100;
 	}
 
 }

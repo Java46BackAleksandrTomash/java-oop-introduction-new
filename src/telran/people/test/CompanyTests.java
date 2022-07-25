@@ -1,8 +1,6 @@
-package telran.people.tests;
+package telran.people.test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.Arrays;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,12 +24,11 @@ class CompanyTests {
 	private static final int BIRTH_YEAR3 = 2000;
 	private static final String EMAIL3 = "empl3@gmail.com";
 	private static final Integer COMPANY_SIZE = 3;
-	private static final int N_RUNS = 1000000;
-	private static final int N_EMPLOYEES = 10000;
-
+	private static final int N_RUNS = 100000;
+	private static final int N_EMPLOYEES = 1000;
 	ICompany company;
 	Employee empl1 = new WageEmployee(ID1, BIRTH_YEAR1, EMAIL1, BASIC_SALARY, WAGE, HOURS1);
-	Employee empl2 = new SalesEmployee(ID2, BIRTH_YEAR2, EMAIL2, BASIC_SALARY, SALES, PERCENT_PAY);
+	Employee empl2 = new SalesPerson(ID2, BIRTH_YEAR2, EMAIL2, BASIC_SALARY, SALES, PERCENT_PAY);
 	Employee empl3 = new WageEmployee(ID3, BIRTH_YEAR3, EMAIL3, BASIC_SALARY, WAGE, HOURS2);
 	Employee[] employees = {
 		empl2, empl1, empl3	
@@ -40,9 +37,8 @@ class CompanyTests {
 	@BeforeEach
 	void setUp() throws Exception {
 		//company = new CompanyArray();
-		//TODO for HW #10
-		company = new CompanySortedArray(); //for HW #10
-		Arrays.sort(employees);
+	
+		company = new CompanySortedArray(); //for HW #10 
 		for (int i = 0; i < employees.length; i++) {
 			company.addEmployee(employees[i]);
 		}
@@ -50,7 +46,7 @@ class CompanyTests {
 
 	@Test
 	void testAddEmployee() {
-		long id = 111;
+		long id = 111111111;
 		assertTrue(company.addEmployee(new Employee(id, 1980, EMAIL1, 1000)));
 		assertFalse(company.addEmployee(new Employee(id, 1980, EMAIL1, 1000)));
 	}
@@ -70,7 +66,7 @@ class CompanyTests {
 		Employee empl = company.getEmployee(ID1);
 		assertNotNull(empl);
 		assertEquals(empl.getId(), ID1);
-		empl = company.getEmployee(111);
+		empl = company.getEmployee(11111111);
 		assertNull(empl);
 	}
 
@@ -88,7 +84,6 @@ class CompanyTests {
 		assertEquals(COMPANY_SIZE, resultEmployees.length);
 		
 	}
-
 	@Test
 	void performanceTest() {
 		fillRandomEmployees();
@@ -103,4 +98,19 @@ class CompanyTests {
 		}
 		
 	}
+	@Test
+	void testSortByAge() {
+		Employee[] expected = {
+			empl3, empl1, empl2	
+		};
+		assertArrayEquals(expected, company.sortEmployeesByAge());
+	}
+	@Test
+	void testSortBySalary() {
+		Employee[] expected = {
+				empl2, empl3, empl1
+			};
+			assertArrayEquals(expected, company.sortEmployeesBySalary());
+	}
+
 }
