@@ -140,14 +140,15 @@ class PersonEmployeeTests {
 	@Test
 	void checkBasicSalary() {
 		Employee empl = new Employee(ID, BIRTH_YEAR, "tel-ran@tel-ran.com", BASIC_SALARY);
-		boolean flException = false;
+		//boolean flException = false;
 		try {
 			empl.setBasicSalary(0);
+			fail("Exception was not thrown");
 		} catch (IllegalArgumentException e) {
-			flException = true;
+			//flException = true;
 			System.out.println(e.getMessage());
 		}
-		assertTrue(flException);
+		//assertTrue(flException);
 	}
 	@Test
 	void percentPayCheck() {
@@ -157,14 +158,15 @@ class PersonEmployeeTests {
 	}
 
 	private void percentPayExceptionCheck(SalesPerson sp, int percent) {
-		boolean flException = false;
+		//boolean flException = false;
 		try {
 			sp.setPercentPay(percent);
+			fail("Exception was not thrown");
 		} catch (IllegalArgumentException e) {
-			flException = true;
+			//flException = true;
 			System.out.println(e.getMessage());
 		}
-		assertTrue(flException);
+		//assertTrue(flException);
 	}
 
 }
